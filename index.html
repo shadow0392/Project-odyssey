@@ -6,266 +6,183 @@
 
 <title>Project Odyssey</title>
 
-<style>
-body {
-    margin: 0;
-    background: #050914;
-    color: #f5c46b;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+<link rel="stylesheet" href="style.css">
 
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-}
-
-.panel {
-    background: #101a2e;
-    border: 2px solid #f5c46b;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 15px 0;
-}
-
-h1 {
-    font-size: 28px;
-}
-
-button {
-    width: 90%;
-    padding: 12px;
-    margin: 8px;
-    background: #172943;
-    color: #f5c46b;
-    border: 1px solid #f5c46b;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-button:active {
-    background: #f5c46b;
-    color: #050914;
-}
-
-.stat {
-    font-size: 18px;
-    margin: 8px;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="ship-interface">
 
-<h1>PROJECT ODYSSEY</h1>
+    <header class="top-bar">
+        <h1>PROJECT ODYSSEY</h1>
+        <p>The First Warp</p>
+    </header>
 
-<p>
-Version 0.1.0<br>
-"The First Warp"
-</p>
 
-<div class="panel">
-<h2>USS Pioneer</h2>
-<p>Class: Shuttle</p>
-<p>Timeline: <span id="timeline">0</span></p>
+    <main id="room-view">
+
+        <section id="engineering-room" class="room active">
+
+            <div class="door-label">
+                ENGINEERING
+            </div>
+
+
+            <div class="warp-core">
+
+                <div class="plasma">
+                </div>
+
+                <div class="core-ring">
+                </div>
+
+            </div>
+
+
+            <div class="engineering-status">
+
+                <div>
+                    TIMELINE:
+                    <span id="timeline-display">0</span>
+                </div>
+
+                <div>
+                    ENERGY:
+                    <span id="energy-display">0</span>
+                </div>
+
+                <div>
+                    OUTPUT:
+                    <span id="production-display">1</span>/sec
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="timeline-room" class="room hidden">
+
+            <div class="timeline-panel">
+
+                <h2>TIMELINE CONTROL</h2>
+
+                <p>
+                    Current Timeline:
+                    <span id="timeline-display-2">0</span>
+                </p>
+
+                <p>
+                    Temporal Knowledge:
+                    <span id="knowledge-display">0</span>
+                </p>
+
+                <p>
+                    Energy Required:
+                    <span id="prestige-cost">5000</span>
+                </p>
+
+                <p>
+                    Current Energy:
+                    <span id="timeline-energy">0</span>
+                </p>
+
+
+                <button onclick="prestige()">
+                    RESTORE TIMELINE
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <section class="engineering-console">
+
+        <h2>ENGINEERING CONSOLE</h2>
+
+
+        <div class="upgrade">
+
+            <h3>Auxiliary Batteries</h3>
+
+            <p>
+                Level:
+                <span id="battery-level">0</span>
+            </p>
+
+            <button onclick="buyBattery()">
+                INSTALL
+            </button>
+
+        </div>
+
+
+
+        <div class="upgrade">
+
+            <h3>Fusion Generator</h3>
+
+            <p>
+                Level:
+                <span id="generator-level">0</span>
+            </p>
+
+            <button onclick="buyGenerator()">
+                UPGRADE
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <nav class="location-tabs">
+
+        <button onclick="openRoom('engineering-room')">
+            ⚙
+            <span>Engineering</span>
+        </button>
+
+
+        <button class="locked">
+            🔒
+            <span>Bridge</span>
+        </button>
+
+
+        <button class="locked">
+            🔒
+            <span>Personnel</span>
+        </button>
+
+
+        <button class="locked">
+            🔒
+            <span>Science</span>
+        </button>
+
+
+        <button onclick="openRoom('timeline-room')">
+            ⏳
+            <span>Timeline</span>
+        </button>
+
+
+    </nav>
+
+
 </div>
 
 
-<div class="panel">
-
-<h2>ENGINE ROOM</h2>
-
-<div class="stat">
-Energy:
-<span id="energy">0</span>
-</div>
-
-<div class="stat">
-Energy / Second:
-<span id="production">1</span>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h3>Auxiliary Batteries</h3>
-
-<p>
-Level:
-<span id="batteryLevel">0</span>
-</p>
-
-<p>
-+1 Energy/sec each
-</p>
-
-<button onclick="buyBattery()">
-Install Battery (Cost: <span id="batteryCost">10</span>)
-</button>
-
-</div>
-
-
-<div class="panel">
-
-<h3>Fusion Generator</h3>
-
-<p>
-Level:
-<span id="generatorLevel">0</span>
-</p>
-
-<p>
-+5 Energy/sec each
-</p>
-
-<button onclick="buyGenerator()">
-Upgrade Generator (Cost: <span id="generatorCost">100</span>)
-</button>
-
-</div>
-
-
-<div class="panel">
-
-<h2>Timeline Control</h2>
-
-<p>
-Temporal Knowledge:
-<span id="knowledge">0</span>
-</p>
-
-<button onclick="prestige()">
-RESTORE TIMELINE
-</button>
-
-</div>
-
-
-</div>
-
-
-<script>
-
-let energy = 0;
-let batteries = 0;
-let generators = 0;
-let timeline = 0;
-let knowledge = 0;
-
-
-function production(){
-
-    return 1 + 
-    batteries * 1 +
-    generators * 5 +
-    (knowledge * 0.05);
-
-}
-
-
-function buyBattery(){
-
-    let cost = 10 + (batteries * 10);
-
-    if(energy >= cost){
-
-        energy -= cost;
-        batteries++;
-
-        update();
-
-    }
-
-}
-
-
-function buyGenerator(){
-
-    let cost = 100 + (generators * 75);
-
-    if(energy >= cost){
-
-        energy -= cost;
-        generators++;
-
-        update();
-
-    }
-
-}
-
-
-function prestige(){
-
-    let reward = Math.floor(energy / 5000);
-
-    if(reward > 0){
-
-        timeline++;
-        knowledge += reward;
-
-        energy = 0;
-        batteries = 0;
-        generators = 0;
-
-        alert(
-        "Timeline restored!\n+" 
-        + reward +
-        " Temporal Knowledge"
-        );
-
-        update();
-
-    }
-
-}
-
-
-function update(){
-
-    document.getElementById("energy").innerText =
-    Math.floor(energy);
-
-    document.getElementById("production").innerText =
-    production().toFixed(1);
-
-    document.getElementById("batteryLevel").innerText =
-    batteries;
-
-    document.getElementById("generatorLevel").innerText =
-    generators;
-
-    document.getElementById("batteryCost").innerText =
-    10 + batteries * 10;
-
-    document.getElementById("generatorCost").innerText =
-    100 + generators * 75;
-
-    document.getElementById("timeline").innerText =
-    timeline;
-
-    document.getElementById("knowledge").innerText =
-    knowledge;
-
-}
-
-
-setInterval(function(){
-
-    energy += production();
-
-    update();
-
-},1000);
-
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

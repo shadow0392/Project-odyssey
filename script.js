@@ -193,6 +193,19 @@ function updateDisplay(){
 );
 
 
+
+document.getElementById(
+    "battery-cost"
+).innerText = formatNumber(
+    (batteryLevel + 1) * 50
+);
+
+document.getElementById(
+    "generator-cost"
+).innerText = formatNumber(
+    (generatorLevel + 1) * 250
+);    
+
 }
 
 

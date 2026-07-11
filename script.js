@@ -147,12 +147,12 @@ function updateDisplay(){
 
     document.getElementById(
         "energy-display"
-    ).innerText = Math.floor(energy);
+    ).innerText = formatNumber(energy);
 
 
     document.getElementById(
         "timeline-energy"
-    ).innerText = Math.floor(energy);
+    ).innerText = formatNumber(energy);
 
 
     document.getElementById(
@@ -187,13 +187,23 @@ function updateDisplay(){
 
 
     document.getElementById(
-        "prestige-cost"
-    ).innerText = 5000 + (timeline * 2500);
+    "prestige-cost"
+).innerText = formatNumber(
+    5000 + (timeline * 2500)
+);
 
 
 }
 
 
 // INITIAL DISPLAY
+function formatNumber(value){
 
+    if(value < 1000){
+        return Math.floor(value);
+    }
+
+    return value.toExponential(2).replace("+", "");
+
+}
 updateDisplay();

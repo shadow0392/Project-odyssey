@@ -5,7 +5,6 @@
 let energy = 0;
 let timeline = 0;
 let knowledge = 0;
-let energyPerSecond = 1;
 let buyAmount = 1;
 
 let batteryLevel = 0;

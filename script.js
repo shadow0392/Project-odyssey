@@ -56,20 +56,6 @@ function buyBattery() {
 
 }
 
-    if(energy >= cost){
-
-        energy -= cost;
-
-        batteryLevel++;
-
-        energyPerSecond += 1;
-
-        updateDisplay();
-
-    }
-
-}
-
 
 
 function buyGenerator() {
@@ -95,22 +81,6 @@ function buyGenerator() {
     updateDisplay();
 
 }
-
-
-    if(energy >= cost){
-
-        energy -= cost;
-
-        generatorLevel++;
-
-        energyPerSecond += 5;
-
-        updateDisplay();
-
-    }
-
-}
-
 
 
 

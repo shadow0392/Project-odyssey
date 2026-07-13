@@ -219,4 +219,13 @@ function formatNumber(value){
     return value.toExponential(2).replace("+", "");
 
 }
+
+let buyAmount = 1;
+
+function setBuyAmount(amount){
+
+    buyAmount = amount;
+
+}
+
 updateDisplay();

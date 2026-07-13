@@ -32,10 +32,29 @@ setInterval(() => {
 // UPGRADES
 
 
-function buyBattery(){
+function buyBattery() {
 
-    let cost = (batteryLevel + 1) * 50;
+    for (let i = 0; i < buyAmount; i++) {
 
+        let cost = (batteryLevel + 1) * 50;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+            batteryLevel++;
+            energyPerSecond += 1;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    updateDisplay();
+
+}
 
     if(energy >= cost){
 
@@ -53,9 +72,29 @@ function buyBattery(){
 
 
 
-function buyGenerator(){
+function buyGenerator() {
 
-    let cost = (generatorLevel + 1) * 250;
+    for (let i = 0; i < buyAmount; i++) {
+
+        let cost = (generatorLevel + 1) * 250;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+            generatorLevel++;
+            energyPerSecond += 5;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    updateDisplay();
+
+}
 
 
     if(energy >= cost){
@@ -220,12 +259,17 @@ function formatNumber(value){
 
 }
 
-let buyAmount = 1;
-
-function setBuyAmount(amount){
+function setBuyAmount(amount) {
 
     buyAmount = amount;
+
+    document.querySelectorAll(".buy-selector button").forEach(button => {
+        button.style.background = "";
+    });
+
+    document.getElementById("buy" + amount).style.background = "#4da6ff";
 
 }
 
 updateDisplay();
+setBuyAmount(1);

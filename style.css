@@ -250,3 +250,34 @@ button {
     opacity:0.4;
 
 }
+.buy-selector{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-bottom:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.buy-selector span{
+
+    color:#f5c46b;
+
+    font-weight:bold;
+
+    margin-right:8px;
+
+}
+
+.buy-selector button{
+
+    min-width:45px;
+
+}

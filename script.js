@@ -206,13 +206,13 @@ function updateDisplay(){
 document.getElementById(
     "battery-cost"
 ).innerText = formatNumber(
-    (batteryLevel + 1) * 50
+    getTotalCost(batteryLevel, 50)
 );
 
 document.getElementById(
     "generator-cost"
 ).innerText = formatNumber(
-    (generatorLevel + 1) * 250
+    getTotalCost(generatorLevel, 250)
 );    
 
 }
@@ -232,6 +232,7 @@ function formatNumber(value){
 function setBuyAmount(amount) {
 
     buyAmount = amount;
+    updateDisplay();
 
     document.querySelectorAll(".buy-selector button").forEach(button => {
         button.style.background = "";
@@ -240,6 +241,18 @@ function setBuyAmount(amount) {
     document.getElementById("buy" + amount).style.background = "#4da6ff";
 
 }
+
+function getTotalCost(currentLevel, baseCost) {
+
+    let total = 0;
+
+    for (let i = 0; i < buyAmount; i++) {
+        total += (currentLevel + i + 1) * baseCost;
+    }
+
+    return total;
+}
+
 
 updateDisplay();
 setBuyAmount(1);

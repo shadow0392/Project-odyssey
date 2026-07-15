@@ -44,7 +44,7 @@ function buyBattery() {
 
             energy -= cost;
             batteryLevel++;
-            energyPerSecond += 1;
+            energyPerSecond += 2;
 
         } else {
 
@@ -319,7 +319,7 @@ document.getElementById(
 );
 
     document.getElementById("battery-output").innerText =
-    formatNumber(batteryLevel);
+    formatNumber(batteryLevel*2);
 
 document.getElementById("generator-output").innerText =
     formatNumber(generatorLevel * 5);

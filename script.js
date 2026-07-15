@@ -10,6 +10,7 @@ let buyAmount = 1;
 let batteryLevel = 0;
 let generatorLevel = 0;
 let plasmaLevel = 0;
+let epsLevel = 0;
 
 let energyPerSecond = 1;
 
@@ -93,6 +94,31 @@ function buyPlasma() {
             energy -= cost;
             plasmaLevel++;
             energyPerSecond += 15;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    updateDisplay();
+
+}
+
+function buyEPS() {
+
+    for (let i = 0; i < buyAmount; i++) {
+
+        let cost = (epsLevel + 1) * 5000;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+            epsLevel++;
+
+            energyPerSecond += 50;
 
         } else {
 
@@ -220,6 +246,10 @@ document.getElementById(
 ).innerText = plasmaLevel;
 
     document.getElementById(
+    "eps-level"
+    ).innerText = epsLevel;
+
+    document.getElementById(
     "prestige-cost"
 ).innerText = formatNumber(
     5000 + (timeline * 2500)
@@ -243,6 +273,12 @@ document.getElementById(
     "plasma-cost"
 ).innerText = formatNumber(
     getTotalCost(plasmaLevel, 1000)
+);
+
+    document.getElementById(
+        "eps-cost"
+    ).innerText = formatNumber(
+    getTotalCost(epsLevel, 5000)
 );
     
 }

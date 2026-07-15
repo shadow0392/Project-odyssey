@@ -232,6 +232,9 @@ function formatNumber(value){
 function setBuyAmount(amount) {
 
     buyAmount = amount;
+
+    alert("Buy amount = " + buyAmount);
+
     updateDisplay();
 
     document.querySelectorAll(".buy-selector button").forEach(button => {
@@ -239,7 +242,6 @@ function setBuyAmount(amount) {
     });
 
     document.getElementById("buy" + amount).style.background = "#4da6ff";
-
 }
 
 function getTotalCost(currentLevel, baseCost) {

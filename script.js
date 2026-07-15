@@ -7,12 +7,40 @@ let timeline = 0;
 let knowledge = 0;
 let buyAmount = 1;
 
-let batteryLevel = 0;
-let generatorLevel = 0;
-let plasmaLevel = 0;
-let epsLevel = 0;
-let injectorLevel = 0;
-let calibrationLevel = 0;
+let batteryProduction = 0;
+let generatorProduction = 0;
+let plasmaProduction = 0;
+let epsProduction = 0;
+let injectorProduction = 0;
+let calibrationProduction = 0;
+
+function calculateProduction() {
+
+    // Batteries
+    batteryProduction = 1 + (batteryLevel * 2);
+
+    // Fusion Generators
+    generatorProduction =
+        batteryProduction * (1 + (generatorLevel * 0.10));
+
+    // Plasma Manifolds
+    plasmaProduction =
+        generatorProduction * (1 + (plasmaLevel * 0.15));
+
+    // EPS Conduits
+    epsProduction =
+        plasmaProduction * (1 + (epsLevel * 0.05));
+
+    // Matter/Antimatter Injectors
+    injectorProduction =
+        epsProduction * (1 + (injectorLevel * 0.20));
+
+    // Warp Core Calibration
+    energyPerSecond =
+        injectorProduction * (1 + (calibrationLevel * 0.01));
+
+}
+
 
 let energyPerSecond = 1000000;
 
@@ -360,19 +388,22 @@ document.getElementById(
 );
 
     document.getElementById("battery-output").innerText =
-    formatNumber(batteryLevel*2);
+    formatNumber(batteryProduction);
 
 document.getElementById("generator-output").innerText =
-    formatNumber(generatorLevel * 5);
+    formatNumber(generatorProduction);
 
 document.getElementById("plasma-output").innerText =
-    formatNumber(plasmaLevel * 15);
+    formatNumber(plasmaProduction);
 
 document.getElementById("eps-output").innerText =
-    formatNumber(epsLevel * 50);
+    formatNumber(epsProduction);
 
 document.getElementById("injector-output").innerText =
-    formatNumber(injectorLevel * 200);
+    formatNumber(injectorProduction);
+
+    document.getElementById("calibration-output").innerText =
+    calibrationLevel;
     
 }
 

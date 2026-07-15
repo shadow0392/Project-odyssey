@@ -9,7 +9,7 @@ let buyAmount = 1;
 
 let batteryLevel = 0;
 let generatorLevel = 0;
-
+let plasmaLevel = 0;
 
 let energyPerSecond = 1;
 
@@ -78,12 +78,30 @@ function buyGenerator() {
 
     }
 
+function buyPlasma() {
+
+    for (let i = 0; i < buyAmount; i++) {
+
+        let cost = (plasmaLevel + 1) * 1000;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+            plasmaLevel++;
+            energyPerSecond += 15;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
     updateDisplay();
 
 }
-
-
-
+    
 
 // TIMELINE RESTORATION
 
@@ -193,7 +211,9 @@ function updateDisplay(){
         "generator-level"
     ).innerText = generatorLevel;
 
-
+document.getElementById(
+    "plasma-level"
+).innerText = plasmaLevel;
 
     document.getElementById(
     "prestige-cost"
@@ -215,6 +235,12 @@ document.getElementById(
     getTotalCost(generatorLevel, 250)
 );    
 
+  document.getElementById(
+    "plasma-cost"
+).innerText = formatNumber(
+    getTotalCost(plasmaLevel, 1000)
+);
+    
 }
 
 

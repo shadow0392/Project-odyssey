@@ -47,7 +47,7 @@ function buyBattery() {
 
             energy -= cost;
             batteryLevel++;
-            energyPerSecond += 2;
+            calculateProduction();
 
         } else {
 
@@ -72,7 +72,7 @@ function buyGenerator() {
 
             energy -= cost;
             generatorLevel++;
-            energyPerSecond += 5;
+            calculateProduction();
 
         } else {
 
@@ -97,7 +97,7 @@ function buyPlasma() {
 
             energy -= cost;
             plasmaLevel++;
-            energyPerSecond += 15;
+            calculateProduction();
 
         } else {
 
@@ -121,8 +121,7 @@ function buyEPS() {
 
             energy -= cost;
             epsLevel++;
-
-            energyPerSecond += 50;
+            calculateProduction();
 
         } else {
 
@@ -148,7 +147,7 @@ function buyInjectors() {
 
             injectorLevel++;
 
-            energyPerSecond += 200;
+            calculateProduction();
 
         } else {
 
@@ -210,7 +209,7 @@ function prestige(){
         generatorLevel = 0;
 
 
-        energyPerSecond = 1 + knowledge;
+        calculateProduction();
 
 
         updateDisplay();
@@ -415,6 +414,34 @@ function getTotalCost(currentLevel, baseCost) {
     return total;
 }
 
+function calculateProduction() {
+
+    // Base Reactor
+    let basePower = 1 + (batteryLevel * 2);
+
+    // Fusion Generators boost batteries
+    let batteryOutput =
+        basePower * (1 + (generatorLevel * 0.10));
+
+    // Plasma boosts generators
+    let generatorOutput =
+        batteryOutput * (1 + (plasmaLevel * 0.15));
+
+    // EPS boosts engineering
+    let engineeringOutput =
+        generatorOutput * (1 + (epsLevel * 0.05));
+
+    // Injectors boost warp output
+    let warpOutput =
+        engineeringOutput * (1 + (injectorLevel * 0.20));
+
+    // Warp Core Calibration
+    let finalOutput =
+        warpOutput * (1 + (calibrationLevel * 0.01));
+
+    energyPerSecond = finalOutput;
+
+}
 
 updateDisplay();
 setBuyAmount(1);

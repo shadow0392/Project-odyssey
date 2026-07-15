@@ -11,8 +11,9 @@ let batteryLevel = 0;
 let generatorLevel = 0;
 let plasmaLevel = 0;
 let epsLevel = 0;
+let injectorLevel = 0;
 
-let energyPerSecond = 1;
+let energyPerSecond = 100;
 
 
 
@@ -119,6 +120,32 @@ function buyEPS() {
             epsLevel++;
 
             energyPerSecond += 50;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    updateDisplay();
+
+}
+
+function buyInjectors() {
+
+    for (let i = 0; i < buyAmount; i++) {
+
+        let cost = (injectorLevel + 1) * 25000;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+
+            injectorLevel++;
+
+            energyPerSecond += 200;
 
         } else {
 
@@ -250,6 +277,10 @@ document.getElementById(
     ).innerText = epsLevel;
 
     document.getElementById(
+        "injector-level"
+    ).innerText = injectorLevel;
+
+    document.getElementById(
     "prestige-cost"
 ).innerText = formatNumber(
     5000 + (timeline * 2500)
@@ -279,6 +310,12 @@ document.getElementById(
         "eps-cost"
     ).innerText = formatNumber(
     getTotalCost(epsLevel, 5000)
+);
+
+    document.getElementById(
+        "injector-cost"
+    ).innerText = formatNumber(
+    getTotalCost(injectorLevel, 25000)
 );
     
 }

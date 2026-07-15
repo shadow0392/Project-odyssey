@@ -12,6 +12,7 @@ let generatorLevel = 0;
 let plasmaLevel = 0;
 let epsLevel = 0;
 let injectorLevel = 0;
+let calibrationLevel = 0;
 
 let energyPerSecond = 100;
 
@@ -21,7 +22,9 @@ let energyPerSecond = 100;
 
 setInterval(() => {
 
-    energy += energyPerSecond;
+    let multiplier = 1 + (calibrationLevel * 0.01);
+
+    energy += energyPerSecond * multiplier;
 
     updateDisplay();
 
@@ -146,6 +149,29 @@ function buyInjectors() {
             injectorLevel++;
 
             energyPerSecond += 200;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+    updateDisplay();
+
+}
+
+function buyCalibration() {
+
+    for (let i = 0; i < buyAmount; i++) {
+
+        let cost = (calibrationLevel + 1) * 100000;
+
+        if (energy >= cost) {
+
+            energy -= cost;
+            calibrationLevel++;
 
         } else {
 

@@ -317,6 +317,21 @@ document.getElementById(
     ).innerText = formatNumber(
     getTotalCost(injectorLevel, 25000)
 );
+
+    document.getElementById("battery-output").innerText =
+    formatNumber(batteryLevel);
+
+document.getElementById("generator-output").innerText =
+    formatNumber(generatorLevel * 5);
+
+document.getElementById("plasma-output").innerText =
+    formatNumber(plasmaLevel * 15);
+
+document.getElementById("eps-output").innerText =
+    formatNumber(epsLevel * 50);
+
+document.getElementById("injector-output").innerText =
+    formatNumber(injectorLevel * 200);
     
 }
 

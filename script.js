@@ -344,6 +344,22 @@ document.getElementById(
     getTotalCost(injectorLevel, 25000)
 );
 
+    document.getElementById(
+    "calibration-level"
+).innerText = calibrationLevel;
+
+
+document.getElementById(
+    "calibration-output"
+).innerText = calibrationLevel;
+
+
+document.getElementById(
+    "calibration-cost"
+).innerText = formatNumber(
+    getTotalCost(calibrationLevel, 100000)
+);
+
     document.getElementById("battery-output").innerText =
     formatNumber(batteryLevel*2);
 

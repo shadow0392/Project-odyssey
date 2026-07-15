@@ -14,7 +14,7 @@ let epsLevel = 0;
 let injectorLevel = 0;
 let calibrationLevel = 0;
 
-let energyPerSecond = 100;
+let energyPerSecond = 1000000;
 
 
 

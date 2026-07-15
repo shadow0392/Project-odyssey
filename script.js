@@ -57,7 +57,6 @@ function buyBattery() {
 }
 
 
-
 function buyGenerator() {
 
     for (let i = 0; i < buyAmount; i++) {
@@ -77,6 +76,11 @@ function buyGenerator() {
         }
 
     }
+
+    updateDisplay();
+
+}
+
 
 function buyPlasma() {
 
